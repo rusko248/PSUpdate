@@ -8,7 +8,7 @@
 
 #include "fireCircleEmitter.h"
 
-fireCircleEmitter::fireCircleEmitter(float r, particle *pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, GLfloat startColor[4], GLfloat startColorVar[4],GLfloat endColor[4], GLfloat endColorVar[4], vector3 force) : circleEmitter(r, pool, emitter_id, pos, dir, dirVar, speed, speedVar, totalParticles, emitsPerFrame, emitVar, life, lifeVar, startColor,  startColorVar, endColor, endColorVar, force){
+fireCircleEmitter::fireCircleEmitter(float r, particle **pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, vector3 force) : circleEmitter(r, pool, emitter_id, pos, dir, dirVar, speed, speedVar, totalParticles, emitsPerFrame, emitVar, life, lifeVar, force){
 
 }
 
@@ -59,7 +59,7 @@ void fireCircleEmitter::display(){
     // Invoke the shader.  Now OpenGL will call our
     // shader programs on anything we draw.
     shader->Bind();
-    shader->SetUniform("pointRadius", 4.0f);
+    shader->SetUniform("pointRadius", 6.0f);
     shader->SetUniform("point_size", 4.0f);
     
 
@@ -68,7 +68,6 @@ void fireCircleEmitter::display(){
     glBegin(GL_POINTS);
     particle *curr = e->particleList;
     while(curr){
-        //glColor4fv(curr->color);
         glVertex3f(curr->pos.x, curr->pos.y, curr->pos.z);
         curr = curr->next;
     }

@@ -24,16 +24,17 @@
 class Emitter
 {
 public:
-	Emitter(particle *pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, GLfloat startColor[4], GLfloat startColorVar[4],GLfloat endColor[4], GLfloat endColorVar[4], vector3 force);
+	Emitter(particle **pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, vector3 force);
+    ~Emitter();
     void update();
     virtual void display();
     void resetPos(vector3 newPos);
 protected:
-    particle *managerParticleList;
+    particle **managerParticleList;
     emitter *e;
     void rotationToDirection(float pitch, float yaw, vector3 *direction);
     virtual bool addParticle();
-    bool updateParticle(particle *p);
+    virtual bool updateParticle(particle *p);
     inline float randDist();
 };
 

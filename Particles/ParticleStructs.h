@@ -24,9 +24,7 @@ struct particle {
     vector3 prevPos;
     vector3 dir;
     int life;
-    GLfloat color[4];
-    GLfloat prevColor[4];
-    GLfloat deltaColor[4];
+    float side;
 };
 
 //generation shapes
@@ -43,10 +41,6 @@ struct emitter {
     int particleCount;
     int emitsPerFrame, emitVar;
     int life, lifeVar;
-    GLfloat startColor[4];
-    GLfloat startColorVar[4];
-    GLfloat endColor[4];
-    GLfloat endColorVar[4];
     vector3 force;
     
 };

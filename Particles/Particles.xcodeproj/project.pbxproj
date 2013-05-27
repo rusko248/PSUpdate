@@ -13,6 +13,7 @@
 		09226A21174C87D90008B41E /* ParticleManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09226A0C174C87D90008B41E /* ParticleManager.cpp */; };
 		09226A22174C87D90008B41E /* pointEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09226A0D174C87D90008B41E /* pointEmitter.cpp */; };
 		09226A3F174EE9B20008B41E /* windCircleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09226A3D174EE9B10008B41E /* windCircleEmitter.cpp */; };
+		09226A61175037A40008B41E /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09226A60175037A30008B41E /* Quaternion.cpp */; };
 		09C6B0BA16644B2C004B5EE7 /* default.vert in Sources */ = {isa = PBXBuildFile; fileRef = 09C6B0B616644B2C004B5EE7 /* default.vert */; };
 		09C6B0BB16644B2C004B5EE7 /* displacement.vert in Sources */ = {isa = PBXBuildFile; fileRef = 09C6B0B716644B2C004B5EE7 /* displacement.vert */; };
 		09C6B0BC16644B2C004B5EE7 /* wind.frag in Sources */ = {isa = PBXBuildFile; fileRef = 09C6B0B816644B2C004B5EE7 /* wind.frag */; };
@@ -68,6 +69,8 @@
 		09226A0D174C87D90008B41E /* pointEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pointEmitter.cpp; sourceTree = "<group>"; };
 		09226A3D174EE9B10008B41E /* windCircleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = windCircleEmitter.cpp; sourceTree = "<group>"; };
 		09226A3E174EE9B20008B41E /* windCircleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = windCircleEmitter.h; sourceTree = "<group>"; };
+		09226A5F175037A30008B41E /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		09226A60175037A30008B41E /* Quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quaternion.cpp; sourceTree = "<group>"; };
 		09C6B0B616644B2C004B5EE7 /* default.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vert; sourceTree = "<group>"; };
 		09C6B0B716644B2C004B5EE7 /* displacement.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = displacement.vert; sourceTree = "<group>"; };
 		09C6B0B816644B2C004B5EE7 /* wind.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = wind.frag; sourceTree = "<group>"; };
@@ -113,19 +116,21 @@
 				E019EB2E0F43BC0300EE6385 /* stglew.h */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				09226A02174C87D80008B41E /* Basic.h */,
-				09226A03174C87D80008B41E /* circleEmitter.h */,
-				09226A04174C87D80008B41E /* Emitter.h */,
-				09226A0B174C87D90008B41E /* fireCircleEmitter.cpp */,
-				09226A05174C87D80008B41E /* fireCircleEmitter.h */,
-				09226A06174C87D90008B41E /* ParticleManager.h */,
 				09226A07174C87D90008B41E /* ParticleStructs.h */,
-				09226A08174C87D90008B41E /* pointEmitter.h */,
-				09226A09174C87D90008B41E /* circleEmitter.cpp */,
-				09226A3D174EE9B10008B41E /* windCircleEmitter.cpp */,
-				09226A3E174EE9B20008B41E /* windCircleEmitter.h */,
-				09226A0A174C87D90008B41E /* Emitter.cpp */,
+				09226A06174C87D90008B41E /* ParticleManager.h */,
 				09226A0C174C87D90008B41E /* ParticleManager.cpp */,
+				09226A04174C87D80008B41E /* Emitter.h */,
+				09226A0A174C87D90008B41E /* Emitter.cpp */,
+				09226A5F175037A30008B41E /* Quaternion.h */,
+				09226A60175037A30008B41E /* Quaternion.cpp */,
+				09226A08174C87D90008B41E /* pointEmitter.h */,
 				09226A0D174C87D90008B41E /* pointEmitter.cpp */,
+				09226A03174C87D80008B41E /* circleEmitter.h */,
+				09226A09174C87D90008B41E /* circleEmitter.cpp */,
+				09226A05174C87D80008B41E /* fireCircleEmitter.h */,
+				09226A0B174C87D90008B41E /* fireCircleEmitter.cpp */,
+				09226A3E174EE9B20008B41E /* windCircleEmitter.h */,
+				09226A3D174EE9B10008B41E /* windCircleEmitter.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				09226A21174C87D90008B41E /* ParticleManager.cpp in Sources */,
 				09226A22174C87D90008B41E /* pointEmitter.cpp in Sources */,
 				09226A3F174EE9B20008B41E /* windCircleEmitter.cpp in Sources */,
+				09226A61175037A40008B41E /* Quaternion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

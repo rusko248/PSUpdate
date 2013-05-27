@@ -8,7 +8,7 @@
 
 #include "Emitter.h"
 
-Emitter::Emitter(particle *pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, GLfloat startColor[4], GLfloat startColorVar[4],GLfloat endColor[4], GLfloat endColorVar[4], vector3 force){
+Emitter::Emitter(particle **pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, vector3 force){
     
     e = new emitter;
     e->emitter_id = emitter_id;
@@ -28,12 +28,6 @@ Emitter::Emitter(particle *pool, int emitter_id, vector3 pos, vector3 dir, vecto
     e->emitVar = emitVar;
     e->life = life;
     e->lifeVar = lifeVar;
-    for(int i = 0; i < 4; i++){
-        e->startColor[i] = startColor[i];
-        e->startColorVar[i] = startColorVar[i];
-        e->endColor[i] = endColor[i];
-        e->endColorVar[i] = endColorVar[i];
-    }
     e->force = force;
     
     managerParticleList = pool;
@@ -52,13 +46,11 @@ void Emitter::rotationToDirection(float pitch, float yaw, vector3 *direction){
 
 bool Emitter::addParticle(){
     particle *newParticle;
-    GLfloat start[4];
-    GLfloat end[4];
     float speed;
     //Particle pool exists and max num particles not exceeded
-    if(e != NULL && managerParticleList != NULL && e->particleCount < e->totalParticles){
-        newParticle = managerParticleList;
-        managerParticleList = managerParticleList->next;
+    if(e != NULL && *managerParticleList != NULL && e->particleCount < e->totalParticles){
+        newParticle = *managerParticleList;
+        *managerParticleList = (*managerParticleList)->next;
         if(e->particleList != NULL){
             e->particleList->prev = newParticle;
         }
@@ -85,23 +77,10 @@ bool Emitter::addParticle(){
         newParticle->dir.y *= speed;
         newParticle->dir.z *= speed;
         
-        start[0] = e->startColor[0] + (e->startColorVar[0] * randDist());
-        start[1] = e->startColor[1] + (e->startColorVar[1] * randDist());
-        start[2] = e->startColor[2] + (e->startColorVar[2] * randDist());
-        end[0] = e->endColor[0] + (e->endColorVar[0] * randDist());
-        end[1] = e->endColor[1] + (e->endColorVar[1] * randDist());
-        end[2] = e->endColor[2] + (e->endColorVar[2] * randDist());
-        
-        newParticle->color[0] = start[0];
-        newParticle->color[1] = start[1];
-        newParticle->color[2] = start[2];
         
         newParticle->life = e->life + (int)((float)e->lifeVar * randDist());
         
-        newParticle->deltaColor[0] = (end[0] - start[0]) / newParticle->life;
-        newParticle->deltaColor[1] = (end[1] - start[1]) / newParticle->life;
-        newParticle->deltaColor[2] = (end[2] - start[2]) / newParticle->life;
-        
+        newParticle->side = randDist();
         e->particleCount++;
         return true;
     }
@@ -114,21 +93,15 @@ bool Emitter::updateParticle(particle *p){
         p->prevPos.y = p->pos.y;
         p->prevPos.z = p->pos.z;
         
+        p->dir = p->dir*(fmax((p->life),e->life/1.1)/(float)e->life);
+        
         p->pos.x += p->dir.x;
         p->pos.y += p->dir.y;
         p->pos.z += p->dir.z;
         
-        p->dir.x += e->force.x*cosf(p->pos.y);
-        p->dir.y += e->force.y*cosf(p->pos.y);
-        p->dir.z += e->force.z*cosf(p->pos.y);
-        
-        p->prevColor[0] = p->color[0];
-        p->prevColor[1] = p->color[1];
-        p->prevColor[2] = p->color[2];
-        
-        p->color[0] += p->deltaColor[0];
-        p->color[1] += p->deltaColor[1];
-        p->color[2] += p->deltaColor[2];
+        p->dir.x += e->force.x*cosf(p->pos.y)*p->side;
+        p->dir.y += e->force.y*cosf(p->pos.y)*p->side;
+        p->dir.z += e->force.z*cosf(p->pos.y)*p->side;
         
         p->life--;
         return true;
@@ -141,9 +114,9 @@ bool Emitter::updateParticle(particle *p){
         if(p->next != NULL){
             p->next->prev = p->prev;
         }
-        p->next = managerParticleList;
+        p->next = *managerParticleList;
         p->prev = NULL;
-        managerParticleList = p;
+        *managerParticleList = p;
         e->particleCount--;
     }
     
@@ -151,7 +124,6 @@ bool Emitter::updateParticle(particle *p){
 }
 
 void Emitter::display(){
-    std::cout << "Adding " << e->particleCount << std::endl;
     for(int newP = 0; newP < (e->emitsPerFrame + e->emitVar*randDist()); newP++){
         addParticle();
     }
@@ -159,11 +131,20 @@ void Emitter::display(){
     glBegin(GL_POINTS);
     particle *curr = e->particleList;
     while(curr){
-        glColor4fv(curr->color);
         glVertex3f(curr->pos.x, curr->pos.y, curr->pos.z);
         curr = curr->next;
     }
     glEnd();
+}
+
+Emitter::~Emitter(){
+    particle *curr = e->particleList;
+    while(curr){
+        particle *toDelete = curr;
+        curr = curr->next;
+        delete toDelete;
+    }
+    delete e;
 }
 
 void Emitter::update(){
@@ -177,5 +158,4 @@ void Emitter::update(){
 
 void Emitter::resetPos(vector3 newPos){
     e->pos = newPos;
-    std::cout << e->pos.z << std::endl;
 }

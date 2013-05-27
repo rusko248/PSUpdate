@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8DD76F620486A84900D96B5E"
-               BuildableName = "ProgrammableShading"
+               BuildableName = "Particles"
                BlueprintName = "Particles"
                ReferencedContainer = "container:Particles.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DD76F620486A84900D96B5E"
-            BuildableName = "ProgrammableShading"
+            BuildableName = "Particles"
             BlueprintName = "Particles"
             ReferencedContainer = "container:Particles.xcodeproj">
          </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DD76F620486A84900D96B5E"
-            BuildableName = "ProgrammableShading"
+            BuildableName = "Particles"
             BlueprintName = "Particles"
             ReferencedContainer = "container:Particles.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DD76F620486A84900D96B5E"
-            BuildableName = "ProgrammableShading"
+            BuildableName = "Particles"
             BlueprintName = "Particles"
             ReferencedContainer = "container:Particles.xcodeproj">
          </BuildableReference>

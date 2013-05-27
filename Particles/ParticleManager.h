@@ -22,7 +22,8 @@ class ParticleManager
 {
 public:
 	ParticleManager(int max);
-    void addEmitter(vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, GLfloat startColor[4], GLfloat startColorVar[4],GLfloat endColor[4], GLfloat endColorVar[4], vector3 force);
+    ~ParticleManager();
+    void addEmitter(vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, vector3 force);
     void addEmitter(Emitter *e);
     void update();
     void display();

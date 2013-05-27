@@ -12,15 +12,17 @@
 #include <iostream>
 #include "Emitter.h"
 #include "math.h"
+#include "Quaternion.h"
 
 class circleEmitter : public Emitter
 {
 public:
-    circleEmitter(float r, particle *pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, GLfloat startColor[4], GLfloat startColorVar[4],GLfloat endColor[4], GLfloat endColorVar[4], vector3 force);
+    circleEmitter(float r, particle **pool, int emitter_id, vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, vector3 force);
     virtual void display();
     
 protected:
     bool addParticle();
+    virtual bool updateParticle(particle *p);
     float randomAngle();
     float radius;
     

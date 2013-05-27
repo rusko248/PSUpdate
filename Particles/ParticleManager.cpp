@@ -11,6 +11,7 @@
 void ParticleManager::createParticleList(int max){
     particle *head = new particle;
     head->prev = NULL;
+    head->next = NULL;
     particlePool = head;
     particle *curr = head;
     for(int i = 0; i < max; i++){
@@ -22,14 +23,26 @@ void ParticleManager::createParticleList(int max){
     }
 }
 
+ParticleManager::~ParticleManager(){
+    particle *curr = particlePool;
+    while(curr){
+        particle *toDelete = curr;
+        curr = curr->next;
+        delete toDelete;
+    }
+    for(int e = 0; e < emitters.size(); e++){
+        delete emitters[e];
+    }
+}
+
 ParticleManager::ParticleManager(int max){
     createParticleList(max);
 }
 
-void ParticleManager::addEmitter(vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, GLfloat startColor[4], GLfloat startColorVar[4],GLfloat endColor[4], GLfloat endColorVar[4], vector3 force){
+void ParticleManager::addEmitter(vector3 pos, vector3 dir, vector3 dirVar, float speed, float speedVar, int totalParticles, int emitsPerFrame, int emitVar, int life, int lifeVar, vector3 force){
     
     int id = emitters.size();
-    Emitter *e = new Emitter(particlePool, id, pos, dir, dirVar, speed, speedVar, totalParticles, emitsPerFrame, emitVar, life, lifeVar, startColor, startColorVar, endColor, endColorVar, force);
+    Emitter *e = new Emitter(&particlePool, id, pos, dir, dirVar, speed, speedVar, totalParticles, emitsPerFrame, emitVar, life, lifeVar, force);
     emitters.push_back(e);
 }
 
